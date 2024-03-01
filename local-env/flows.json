@@ -1,0 +1,188 @@
+[
+    {
+        "id": "c6cc7badd6dabaa4",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "dacc41016fb48069",
+        "type": "counter-loop",
+        "z": "c6cc7badd6dabaa4",
+        "name": "Generate Elements",
+        "counter": "varCounter",
+        "counterType": "msg",
+        "reset": true,
+        "resetValue": "value-null",
+        "initial": 0,
+        "initialType": "num",
+        "operator": "lt",
+        "termination": "totalElements",
+        "terminationType": "msg",
+        "increment": 1,
+        "incrementType": "num",
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "8576441c189ede6f"
+            ],
+            [
+                "4aa8123e11240921",
+                "0bfa8732a2ca82d6",
+                "2b255dfcf93104d6"
+            ]
+        ]
+    },
+    {
+        "id": "0bfa8732a2ca82d6",
+        "type": "event-manager-dispatcher",
+        "z": "c6cc7badd6dabaa4",
+        "name": "",
+        "maxConcurrency": "20",
+        "x": 310,
+        "y": 280,
+        "wires": [
+            [
+                "906592f2bfa852e3"
+            ]
+        ]
+    },
+    {
+        "id": "8576441c189ede6f",
+        "type": "debug",
+        "z": "c6cc7badd6dabaa4",
+        "name": "End",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "3c51f93cf5ea3113",
+        "type": "inject",
+        "z": "c6cc7badd6dabaa4",
+        "name": "Generate 30 elements",
+        "props": [
+            {
+                "p": "totalElements",
+                "v": "100",
+                "vt": "num"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 160,
+        "y": 60,
+        "wires": [
+            [
+                "dacc41016fb48069"
+            ]
+        ]
+    },
+    {
+        "id": "d31af76c85a534b8",
+        "type": "debug",
+        "z": "c6cc7badd6dabaa4",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "varCounter",
+        "targetType": "msg",
+        "statusVal": "varCounter",
+        "statusType": "auto",
+        "x": 800,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "906592f2bfa852e3",
+        "type": "delay",
+        "z": "c6cc7badd6dabaa4",
+        "name": "Execute Code",
+        "pauseType": "random",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "500",
+        "randomLast": "1000",
+        "randomUnits": "milliseconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 580,
+        "y": 280,
+        "wires": [
+            [
+                "d31af76c85a534b8",
+                "82baa1594e234933"
+            ]
+        ]
+    },
+    {
+        "id": "4aa8123e11240921",
+        "type": "function",
+        "z": "c6cc7badd6dabaa4",
+        "name": "Loop Next",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 160,
+        "wires": [
+            [
+                "dacc41016fb48069"
+            ]
+        ]
+    },
+    {
+        "id": "82baa1594e234933",
+        "type": "event-manager-checkpoint",
+        "z": "c6cc7badd6dabaa4",
+        "name": "",
+        "x": 820,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "2b255dfcf93104d6",
+        "type": "debug",
+        "z": "c6cc7badd6dabaa4",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "varCounter",
+        "targetType": "msg",
+        "statusVal": "varCounter",
+        "statusType": "auto",
+        "x": 820,
+        "y": 160,
+        "wires": []
+    }
+]

@@ -1,0 +1,12 @@
+﻿.vscode
+dist
+/node_modules
+local-env/.config.users.json.backup
+local-env/package.json
+local-env/.config.users.json
+local-env/.config.nodes.json
+*.backup
+local-env/.config.runtime.json
+*.ser
+*.pem
+*.key

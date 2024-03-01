@@ -1,0 +1,43 @@
+<script type="text/javascript">
+    RED.nodes.registerType('event-manager-dispatcher', {
+        category: 'event-manager',
+        color: 'cornflowerblue',
+        paletteLabel: 'dispatcher',
+        defaults: {
+            name:                   { value: ''                                                     },
+            maxConcurrency:         { value: '20', required: true, validate:RED.validators.number() },
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'icon.png',
+        align: 'left',
+        label: function () {
+            return this.name || 'event dispatcher';
+        },
+
+    });
+</script>
+
+
+<script type="text/html" data-template-name="event-manager-dispatcher">
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
+    </div>
+
+    <div class="form-row form-row-maxConcurrency">
+        <label for="node-input-maxConcurrency"><i class="fa"></i>Max Concurrency</label>
+        <input type="text" id="node-input-maxConcurrency" placeholder="0" />
+    </div>        
+
+</script>
+
+<script type="text/html" data-help-name="event-manager-dispatcher">
+    <span class="red-ui-text-bidi-aware">
+        <h2>Event Manager Dispatcher</h2>
+        <!-- <p>Query the ledger and return the channel info</p>
+        <h3 class="red-ui-help-info-header">Details</h3>
+        <p>Basic connection config nodes must be provided: <code>Gateway</code>, <code>Identity</code> and <code>Channel</code> </p> -->
+    </span>
+</script>
