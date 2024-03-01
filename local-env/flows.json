@@ -75,7 +75,7 @@
         "props": [
             {
                 "p": "totalElements",
-                "v": "100",
+                "v": "1",
                 "vt": "num"
             },
             {
@@ -184,5 +184,34 @@
         "x": 820,
         "y": 160,
         "wires": []
+    },
+    {
+        "id": "b33381f4ecd6b8f4",
+        "type": "inject",
+        "z": "c6cc7badd6dabaa4",
+        "name": "Configure Max Concurrency",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"isEventManagerConfig\": \"true\", \"maxConcurrency\": 10}",
+        "payloadType": "json",
+        "x": 180,
+        "y": 360,
+        "wires": [
+            [
+                "0bfa8732a2ca82d6"
+            ]
+        ]
     }
 ]

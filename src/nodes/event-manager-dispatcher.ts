@@ -40,6 +40,11 @@ export = (RED: NodeAPI): void => {
     this.on('input', async (msg: NodeMessageInFlow, send, done) => {
       try {
 
+        if (dinamicConfig(this, msg)) {
+          done();
+          return;
+        }
+
         eventsQueue.enqueue(msg);
 
         // Update node status
@@ -60,6 +65,23 @@ export = (RED: NodeAPI): void => {
       deleteSharedData(this, 'eventsQueue');
       done();
     });
+
+
+    function dinamicConfig(node: Node<EventManagerDispatcherDef>, msg: NodeMessageInFlow): boolean {
+      const payload = RED.util.getMessageProperty(msg, 'payload');
+
+      if (payload && (payload.isEventManagerConfig === true || payload.isEventManagerConfig === 'true')) {
+        if (payload.maxConcurrency && !isNaN(+payload.maxConcurrency)) {
+          eventsQueue.setMaxConcurrency(Number(payload.maxConcurrency));
+        }
+
+        node.status({ fill: eventsQueue.isPrintStatusWarning(),  shape: 'dot', text: `${eventsQueue.printStatus()}` });
+
+        return true;
+      }
+
+      return false;
+    }
 
   }
 
