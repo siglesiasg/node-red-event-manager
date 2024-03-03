@@ -1,9 +1,11 @@
 name: Build Node
 
-on:
-  push:
-    tags:
-      - 'v[0-9]+.*'
+on: [push]
+
+# on:
+#   push:
+#     tags:
+#       - 'v[0-9]+.*'      
 
 jobs:
   build:
