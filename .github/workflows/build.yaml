@@ -18,9 +18,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.16.1'
-
-      - name: Build if version changed
         run: |
           npm ci
           npm run build
+          ls ./dist
+          ls ./dist/libs
+          ls ./dist/nodes
+          ls ./dist/icons
 
