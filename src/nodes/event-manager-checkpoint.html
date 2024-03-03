@@ -30,8 +30,12 @@
 <script type="text/html" data-help-name="event-manager-checkpoint">
     <span class="red-ui-text-bidi-aware">
         <h2>Event Manager Checkpoint</h2>
-        <!-- <p>Query the ledger and return the channel info</p>
+        <p>Mark the origin <code>event-manager-dispatcher</code> node to indicate that this message has completed its execution, allowing new messages to be emitted.</p>
         <h3 class="red-ui-help-info-header">Details</h3>
-        <p>Basic connection config nodes must be provided: <code>Gateway</code>, <code>Identity</code> and <code>Channel</code> </p> -->
+        <p>Messages must contain the <code>_dispatchNodeId</code> tag with the origin node ID.</p>
+        <dl class="message-properties">
+            <dt>_dispatchNodeId<span class="property-type">string</span></dt>
+            <dd>Origin node ID that emitted the message.</dd>
+        </dl>    
     </span>
 </script>

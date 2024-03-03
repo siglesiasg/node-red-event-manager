@@ -14,7 +14,13 @@
         "url": "https://github.com/siglesiasg/node-red-event-manager"
     },
     "keywords": [
-        "node-red"
+        "node-red",
+        "event-management",
+        "flow-management",
+        "flow-controller",
+        "flow",
+        "slots",
+        "queue"
     ],
     "license": "Apache-2.0",
     "scripts": {

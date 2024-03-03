@@ -36,8 +36,17 @@
 <script type="text/html" data-help-name="event-manager-dispatcher">
     <span class="red-ui-text-bidi-aware">
         <h2>Event Manager Dispatcher</h2>
-        <!-- <p>Query the ledger and return the channel info</p>
+        <p>This node emits messages only if a slot is available. Otherwise, they will be stored in memory until a free slot becomes available.</p>
+        <p>To free up slots, the <code>event-management-checkpoint</code> node must be called with the origin node ID.</p>
         <h3 class="red-ui-help-info-header">Details</h3>
-        <p>Basic connection config nodes must be provided: <code>Gateway</code>, <code>Identity</code> and <code>Channel</code> </p> -->
+        <p>The maximum number of slots can be configured using the <code>Max Concurrency</code> tag. This configuration can be dynamically updated by injecting a message with the following payload: <code>{"payload": {"isEventManagerConfig": true, "maxConcurrency": 10}}</code> Note that this message is not emitted.</p>
+        <p>Messages now include a new tag <code>_dispatchNodeId</code>, indicating which node emitted the message. This tag is crucial for freeing slots when messages reach the <code>event-management-checkpoint</code> node.</p>
+        <h3 class="red-ui-help-info-header">Input payload for dynamic configuration:</h3>
+        <dl class="message-properties">
+            <dt class="optional">payload.isEventManagerConfig<span class="property-type">boolean</span></dt>
+            <dd>If set to <code>true</code>, the node enters configuration mode, and this message will not be emitted.</dd>
+            <dt class="optional">payload.maxConcurrency<span class="property-type">number</span></dt>
+            <dd>In configuration mode, this is mandatory and must be a number greater than 0 to configure the node's maximum concurrency.</dd>
+        </dl>
     </span>
 </script>

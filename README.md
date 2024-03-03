@@ -8,13 +8,21 @@ Event Manager dispatcher for Node Red
 
 ## Overview
 
-BETA VERSION
+This repository contains custom nodes for Node-RED that enhance event management capabilities. The nodes include:
 
-### Key features
+- **Event Manager Checkpoint:** Allows marking the completion of message execution and enables the emission of new messages from the `event-manager-dispatcher` node.
 
-### Compatibility
+- **Event Manager Dispatcher:** Emits messages based on slot availability, storing them in memory until a free slot becomes available. Configuration options include dynamic updates for maximum concurrency.
 
-## Getting Started
+### Key Features
+
+- Efficient event management for Node-RED flows.
+- Dynamic configuration for maximum concurrency.
+- Seamless integration with the Node-RED environment.
+
+## Example
+
+![Example GIF](./readme-assets/example.gif)
 
 ## Donate
 Do you like my work? Buy me a coffee - or pizza 😜🍕
