@@ -1,6 +1,6 @@
 {
     "name": "@siglesiasg/node-red-event-manager",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Event Manager for Node Red",
     "author": {
         "name": "Secundino Iglesias",

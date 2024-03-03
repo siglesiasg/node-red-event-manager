@@ -142,7 +142,7 @@
         "id": "0bfa8732a2ca82d6",
         "type": "event-manager-dispatcher",
         "z": "c6cc7badd6dabaa4",
-        "name": "Controll Flow",
+        "name": "Control Flow",
         "maxConcurrency": "30",
         "x": 300,
         "y": 140,
@@ -245,7 +245,7 @@
         "id": "82baa1594e234933",
         "type": "event-manager-checkpoint",
         "z": "c6cc7badd6dabaa4",
-        "name": "Controll Flow Checkpoint",
+        "name": "Control Flow Checkpoint",
         "x": 770,
         "y": 200,
         "wires": []
