@@ -20,14 +20,18 @@ export = (RED: NodeAPI): void => {
       try {
 
         const _dispatchNodeId: string = (msg as any)._dispatchNodeId;
-        if (!_dispatchNodeId) { throw new Error('Unable to get _dispatchNodeId attribute from message'); }
+        if (!_dispatchNodeId) {
+          throw new Error('Unable to get _dispatchNodeId attribute from message');
+        }
         const eventsQueue: EventsQueue<NodeMessageInFlow> = getSharedData(RED, _dispatchNodeId, 'eventsQueue');
 
         eventsQueue.checkEvent();
 
         // Update origin node message
-        const nodeAny = RED.nodes.getNode(_dispatchNodeId) as any;
-        nodeAny.status({ fill: eventsQueue.isPrintStatusWarning(), shape: 'dot', text: `${eventsQueue.printStatus()}` });
+        if (config.debugStatus) {
+          const nodeAny = RED.nodes.getNode(_dispatchNodeId) as any;
+          nodeAny.status({ fill: eventsQueue.isPrintStatusWarning(), shape: 'dot', text: `${eventsQueue.printStatus()}` });
+        }
 
         // Update node as checked
         this.status({ fill: 'green', shape: 'dot', text: 'Checked' });

@@ -25,7 +25,9 @@ export = (RED: NodeAPI): void => {
     eventsQueue.setConsumeEvents((msg) => {
 
       // Update node status
-      this.status({ fill: eventsQueue.isPrintStatusWarning(),  shape: 'dot', text: `${eventsQueue.printStatus()}` });
+      if (config.debugStatus) {
+        this.status({ fill: eventsQueue.isPrintStatusWarning(),  shape: 'dot', text: `${eventsQueue.printStatus()}` });
+      }
 
       // Add to msg current node id to perform checkpoint
       const dispatcherNodeId = `${this.id}`;
@@ -48,8 +50,9 @@ export = (RED: NodeAPI): void => {
         eventsQueue.enqueue(msg);
 
         // Update node status
-        this.status({ fill: eventsQueue.isPrintStatusWarning(),  shape: 'dot', text: `${eventsQueue.printStatus()}` });
-
+        if (config.debugStatus) {
+          this.status({ fill: eventsQueue.isPrintStatusWarning(),  shape: 'dot', text: `${eventsQueue.printStatus()}` });
+        }
         done();
 
       } catch (error: any) {
@@ -62,6 +65,7 @@ export = (RED: NodeAPI): void => {
     // removed -> "Node disabled / deleted" | !removed -> "Node is reestarted"
     this.on('close', async (removed: boolean, done: () => void) => {
       this.debug('Event Manager Dispatcher Closed');
+      eventsQueue.stopConsumingEvents();
       deleteSharedData(this, 'eventsQueue');
       done();
     });
@@ -75,7 +79,9 @@ export = (RED: NodeAPI): void => {
           eventsQueue.setMaxConcurrency(Number(payload.maxConcurrency));
         }
 
-        node.status({ fill: eventsQueue.isPrintStatusWarning(),  shape: 'dot', text: `${eventsQueue.printStatus()}` });
+        if (config.debugStatus) {
+          node.status({ fill: eventsQueue.isPrintStatusWarning(),  shape: 'dot', text: `${eventsQueue.printStatus()}` });
+        }
 
         return true;
       }
