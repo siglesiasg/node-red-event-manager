@@ -5,8 +5,8 @@
         paletteLabel: 'dispatcher',
         defaults: {
             name:                   { value: ''                                                          },
-            maxConcurrency:         { value: '20',    required: true, validate:RED.validators.number()   },
-            debugStatus:            { value: 'false', required: true, validate:RED.validators.boolean()  },
+            maxConcurrency:         { value: "20",    required: true, validate:RED.validators.number()   },
+            debugStatus:            { value: "false", required: true                                     },
         },
         inputs: 1,
         outputs: 1,
@@ -32,9 +32,12 @@
         <input type="text" id="node-input-maxConcurrency" placeholder="0" />
     </div>
 
-    <div class="form-row form-row-debugStatus">
-        <label for="node-input-debugStatus"><i class="fa"></i>Debug Node on Status (performance will be degraded)</label>
-        <input type="text" id="node-input-debugStatus" placeholder="false" />
+    <div class="form-row">
+      <label for="node-input-debugStatus"><i class="fa"></i>Debug Node on Status (performance will be degraded)</label>
+      <select id="node-input-debugStatus" style="width: 70%;">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+      </select>
     </div>
 
 </script>

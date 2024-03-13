@@ -144,6 +144,7 @@
         "z": "c6cc7badd6dabaa4",
         "name": "Control Flow",
         "maxConcurrency": "30",
+        "debugStatus": "false",
         "x": 300,
         "y": 140,
         "wires": [
@@ -246,6 +247,7 @@
         "type": "event-manager-checkpoint",
         "z": "c6cc7badd6dabaa4",
         "name": "Control Flow Checkpoint",
+        "debugStatus": "false",
         "x": 770,
         "y": 200,
         "wires": []

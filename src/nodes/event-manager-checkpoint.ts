@@ -19,6 +19,7 @@ export = (RED: NodeAPI): void => {
     this.on('input', async (msg: NodeMessageInFlow, send, done) => {
       try {
 
+        // Recover origin
         const _dispatchNodeId: string = (msg as any)._dispatchNodeId;
         if (!_dispatchNodeId) {
           throw new Error('Unable to get _dispatchNodeId attribute from message');
@@ -28,13 +29,14 @@ export = (RED: NodeAPI): void => {
         eventsQueue.checkEvent();
 
         // Update origin node message
-        if (config.debugStatus) {
+        if ('true' === config.debugStatus) {
           const nodeAny = RED.nodes.getNode(_dispatchNodeId) as any;
           nodeAny.status({ fill: eventsQueue.isPrintStatusWarning(), shape: 'dot', text: `${eventsQueue.printStatus()}` });
+
+          // Update node as checked
+          this.status({ fill: 'green', shape: 'dot', text: 'Checked' });
         }
 
-        // Update node as checked
-        this.status({ fill: 'green', shape: 'dot', text: 'Checked' });
 
         done();
 

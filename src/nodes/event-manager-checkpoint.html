@@ -4,8 +4,8 @@
         color: 'cornflowerblue',
         paletteLabel: 'checkpoint',
         defaults: {
-            name:                   { value: '' },
-            debugStatus:            { value: 'false', required: true, validate:RED.validators.boolean()  },
+            name:                   { value: ''                         },
+            debugStatus:            { value: 'false', required: true    },
         },
         inputs: 1,
         outputs: 0,
@@ -26,9 +26,12 @@
         <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
     </div>
 
-    <div class="form-row form-row-debugStatus">
+    <div class="form-row">
       <label for="node-input-debugStatus"><i class="fa"></i>Debug Node on Status (performance will be degraded)</label>
-      <input type="text" id="node-input-debugStatus" placeholder="false" />
+      <select id="node-input-debugStatus" style="width: 70%;">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+      </select>
     </div>
 
 </script>

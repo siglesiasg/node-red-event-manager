@@ -25,7 +25,7 @@ export = (RED: NodeAPI): void => {
     eventsQueue.setConsumeEvents((msg) => {
 
       // Update node status
-      if (config.debugStatus) {
+      if ('true' === config.debugStatus) {
         this.status({ fill: eventsQueue.isPrintStatusWarning(),  shape: 'dot', text: `${eventsQueue.printStatus()}` });
       }
 
@@ -50,7 +50,7 @@ export = (RED: NodeAPI): void => {
         eventsQueue.enqueue(msg);
 
         // Update node status
-        if (config.debugStatus) {
+        if ('true' === config.debugStatus) {
           this.status({ fill: eventsQueue.isPrintStatusWarning(),  shape: 'dot', text: `${eventsQueue.printStatus()}` });
         }
         done();
@@ -79,7 +79,7 @@ export = (RED: NodeAPI): void => {
           eventsQueue.setMaxConcurrency(Number(payload.maxConcurrency));
         }
 
-        if (config.debugStatus) {
+        if ('true' === config.debugStatus) {
           node.status({ fill: eventsQueue.isPrintStatusWarning(),  shape: 'dot', text: `${eventsQueue.printStatus()}` });
         }
 
