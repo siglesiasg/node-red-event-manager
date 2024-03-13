@@ -28,7 +28,7 @@
         "start": "npm run cpy-res && node --inspect node_modules/node-red/red.js -u ./local-env --safe",
         "clean": "rimraf dist",
         "build": "npm run clean && npm run cpy-res && tsc",
-        "cpy-res": "cpy ./src/nodes/*.html ./dist/nodes && cpy ./src/nodes/icons/* ./dist/nodes/icons/",
+        "cpy-res": "cpy --flat ./src/nodes/*.html ./dist/nodes && cpy --flat ./src/nodes/icons/* ./dist/nodes/icons/",
         "lint": "eslint .",
         "lint-fix": "eslint --fix ."
     },
