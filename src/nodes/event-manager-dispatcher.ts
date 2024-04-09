@@ -15,16 +15,19 @@ export = (RED: NodeAPI): void => {
 
     // Create Queue
     const eventsQueue = new EventsQueue<NodeMessageInFlow>(config.maxConcurrency);
-    eventsQueue.startConsumingEvents();
+    if ('true' === config.consumeEventsOnStart) {
+      eventsQueue.startConsumingEvents();
+      this.status({ fill: 'green', shape: 'dot', text: 'Consuming events' });
+    } else {
+      this.status({ fill: 'yellow',  shape: 'dot', text: 'Not consuming events' });
+    }
 
     // Save link
     addSharedData(this, 'eventsQueue', eventsQueue);
 
-    this.status({ fill: 'green', shape: 'dot', text: 'Ready' });
-
     eventsQueue.setConsumeEvents((msg) => {
 
-      // Update node status
+      // Debug node status
       if ('true' === config.debugStatus) {
         this.status({ fill: eventsQueue.isPrintStatusWarning(),  shape: 'dot', text: `${eventsQueue.printStatus()}` });
       }
@@ -38,15 +41,21 @@ export = (RED: NodeAPI): void => {
 
     });
 
-    /** On Input */
+    /** On Input -> Check if it's a config message or enqueue all messages */
     this.on('input', async (msg: NodeMessageInFlow, send, done) => {
       try {
 
+        // Message of loading config
         if (dinamicConfig(this, msg)) {
           done();
-          return;
+          return; // Do not enqueue this message
         }
 
+        if (!eventsQueue.isConsumingEvents()) {
+          this.status({ fill: 'yellow',  shape: 'dot', text: `Not consuming events. In queue: ${eventsQueue.size()}` });
+        }
+
+        // Enqueue message to be sent
         eventsQueue.enqueue(msg);
 
         // Update node status
@@ -75,10 +84,22 @@ export = (RED: NodeAPI): void => {
       const payload = RED.util.getMessageProperty(msg, 'payload');
 
       if (payload && (payload.isEventManagerConfig === true || payload.isEventManagerConfig === 'true')) {
+
+        // Set the concurrency
         if (payload.maxConcurrency && !isNaN(+payload.maxConcurrency)) {
           eventsQueue.setMaxConcurrency(Number(payload.maxConcurrency));
         }
 
+        if (payload.consumeEvents || payload.consumeEvents === false) {
+          if (payload.consumeEvents) {
+            node.status({ fill: 'green', shape: 'dot', text: 'Consuming events' });
+            eventsQueue.startConsumingEvents();
+          } else {
+            node.status({ fill: 'yellow',  shape: 'dot', text: `Not consuming events. In queue: ${eventsQueue.size()}` });
+            eventsQueue.stopConsumingEvents();
+          }
+        }
+        // Print debug
         if ('true' === config.debugStatus) {
           node.status({ fill: eventsQueue.isPrintStatusWarning(),  shape: 'dot', text: `${eventsQueue.printStatus()}` });
         }

@@ -47,6 +47,10 @@ export class EventsQueue<T> {
     this.isConsuming = false;
   }
 
+  isConsumingEvents(): boolean {
+    return this.isConsuming;
+  }
+
   checkEvent() {
     if (this.currentlyUncheckedEvents === 0) {
       return;

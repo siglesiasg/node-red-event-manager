@@ -6,6 +6,7 @@
         defaults: {
             name:                   { value: ''                                                          },
             maxConcurrency:         { value: "20",    required: true, validate:RED.validators.number()   },
+            consumeEventsOnStart:   { value: "true", required: true                                      },
             debugStatus:            { value: "false", required: true                                     },
         },
         inputs: 1,
@@ -30,6 +31,14 @@
     <div class="form-row form-row-maxConcurrency">
         <label for="node-input-maxConcurrency"><i class="fa"></i>Max Concurrency</label>
         <input type="text" id="node-input-maxConcurrency" placeholder="0" />
+    </div>
+
+    <div class="form-row">
+      <label for="node-input-consumeEventsOnStart"><i class="fa"></i>Consume events on start</label>
+      <select id="node-input-consumeEventsOnStart" style="width: 70%;">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+      </select>
     </div>
 
     <div class="form-row">
