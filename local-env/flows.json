@@ -167,7 +167,7 @@
         "targetType": "full",
         "statusVal": "payload",
         "statusType": "msg",
-        "x": 860,
+        "x": 880,
         "y": 40,
         "wires": []
     },
@@ -213,7 +213,7 @@
         "targetType": "msg",
         "statusVal": "varCounter",
         "statusType": "auto",
-        "x": 840,
+        "x": 900,
         "y": 140,
         "wires": []
     },
@@ -234,7 +234,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 620,
+        "x": 680,
         "y": 140,
         "wires": [
             [
@@ -249,7 +249,7 @@
         "z": "c6cc7badd6dabaa4",
         "name": "Control Flow Checkpoint",
         "debugStatus": "false",
-        "x": 830,
+        "x": 910,
         "y": 200,
         "wires": []
     },
