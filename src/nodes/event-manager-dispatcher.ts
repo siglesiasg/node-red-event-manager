@@ -51,16 +51,16 @@ export = (RED: NodeAPI): void => {
           return; // Do not enqueue this message
         }
 
-        if (!eventsQueue.isConsumingEvents()) {
-          this.status({ fill: 'yellow',  shape: 'dot', text: `Not consuming events. In queue: ${eventsQueue.size()}` });
-        }
-
         // Enqueue message to be sent
         eventsQueue.enqueue(msg);
 
         // Update node status
         if ('true' === config.debugStatus) {
-          this.status({ fill: eventsQueue.isPrintStatusWarning(),  shape: 'dot', text: `${eventsQueue.printStatus()}` });
+          if (!eventsQueue.isConsumingEvents()) {
+            this.status({ fill: 'yellow',  shape: 'dot', text: `Not consuming events. In queue: ${eventsQueue.size()}` });
+          } else {
+            this.status({ fill: eventsQueue.isPrintStatusWarning(),  shape: 'dot', text: `${eventsQueue.printStatus()}` });
+          }
         }
         done();
 
@@ -95,7 +95,7 @@ export = (RED: NodeAPI): void => {
             node.status({ fill: 'green', shape: 'dot', text: 'Consuming events' });
             eventsQueue.startConsumingEvents();
           } else {
-            node.status({ fill: 'yellow',  shape: 'dot', text: `Not consuming events. In queue: ${eventsQueue.size()}` });
+            node.status({ fill: 'yellow',  shape: 'dot', text: `Not consuming events` });
             eventsQueue.stopConsumingEvents();
           }
         }
